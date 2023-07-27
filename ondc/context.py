@@ -15,13 +15,15 @@ class Action(str, Enum):
 class Domain(str, Enum):
     ONDC_TRV10 = 'ONDC:TRV10'
 
+def utc_timestamp():
+    return datetime.utcnow().isoformat()[:-3] + 'Z'
 
 class Context(BaseModel):
     domain: Domain
     action: Action
     message_id: str
     transaction_id: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow, )
+    timestamp: str = Field(default_factory=utc_timestamp, )
     bap_id: str
     bap_uri: str
     bpp_id: Optional[str] = Field(default=None)
@@ -29,7 +31,9 @@ class Context(BaseModel):
 
     @field_serializer('timestamp')
     def serialize_dt(self, dt: datetime, _info):
-        return dt.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3]
+        return dt.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + 'Z'
+
+
 
 
 

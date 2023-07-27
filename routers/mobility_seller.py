@@ -15,13 +15,11 @@ router = APIRouter(
 
 
 def send_on_search(url: str, on_search: OnSearch):
-    headers = {"Content-Type": "application/json"}
-    return requests.post(url + "/on_search", data=on_search.model_dump_json(), headers=headers)
+    return requests.post(url + "/on_search", json=on_search.model_dump())
 
 
 def send_on_select(url: str, on_select: OnSelect):
-    headers = {"Content-Type": "application/json"}
-    return requests.post(url + "/on_select", data=on_select.model_dump_json(), headers=headers)
+    return requests.post(url + "/on_select", data=on_select.model_dump())
 
 
 @router.post("/search")
@@ -34,7 +32,7 @@ def get_catalogue(body: search_model.Search, background_task: BackgroundTasks):
     background_task.add_task(send_on_search, body.context.bap_uri, static_on_search)
     json_response = {
         "domain": "ONDC:TRV10",
-        "timestamp": f"{body.context.timestamp}",
+        "timestamp": f"{datetime.datetime.utcnow().isoformat()[:-3]+'Z'}",
         "bap_id": f"{body.context.bap_id}",
         "transaction_id": f"{body.context.transaction_id}",
         "message_id": f"{body.context.message_id}",
@@ -56,12 +54,12 @@ def get_select(body: search_model.Select, background_task: BackgroundTasks):
     background_task.add_task(send_on_select, body.context.bap_uri, static_on_select)
     json_response = {
         "domain": "ONDC:TRV10",
-        "timestamp": f"{body.context.timestamp}",
+        "timestamp": f"{datetime.datetime.utcnow().isoformat()[:-3]+'Z'}",
         "bap_id": f"{body.context.bap_id}",
         "transaction_id": f"{body.context.transaction_id}",
         "message_id": f"{body.context.message_id}",
         "bpp_id": f"{body.context.bpp_id}",
-        "bpp_id": f"{body.context.bpp_uri}",
+        "bpp_uri": f"{body.context.bpp_uri}",
         "city": "std:080",
         "core_version": "0.9.4",
         "action": f"{body.context.action}",
