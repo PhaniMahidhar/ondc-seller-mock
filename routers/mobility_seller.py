@@ -22,7 +22,7 @@ def send_on_search(url: str, on_search: OnSearch):
 
 
 def send_on_select(url: str, on_select: OnSelect):
-    return requests.post(url + "/on_select", data=on_select.model_dump())
+    return requests.post(url + "/on_select", json=on_select.model_dump())
 
 
 @router.post("/search")
