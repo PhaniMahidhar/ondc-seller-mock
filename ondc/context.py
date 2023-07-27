@@ -4,6 +4,8 @@ from typing import Optional
 
 from pydantic import BaseModel, Field, field_serializer
 
+BPP_URI= "https://mobility-mockserver-00ab4bdaacc0.herokuapp.com/mobility/bpp/mock/"
+BPP_ID="seller-mock"
 
 class Action(str, Enum):
     SEARCH = 'search'
@@ -26,8 +28,8 @@ class Context(BaseModel):
     timestamp: str = Field(default_factory=utc_timestamp, )
     bap_id: str
     bap_uri: str
-    bpp_id: Optional[str] = Field(default=None)
-    bpp_uri: Optional[str] = Field(default=None)
+    bpp_id: Optional[str] = Field(default=BPP_ID)
+    bpp_uri: Optional[str] = Field(default=BPP_URI)
 
     @field_serializer('timestamp')
     def serialize_dt(self, dt: datetime, _info):
