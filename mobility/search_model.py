@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Any
 
 from pydantic import BaseModel, json_schema
@@ -14,3 +15,12 @@ class OnSearch(BaseModel):
     context: Context
     message: Any
 
+
+class Select(BaseModel):
+    context: Context
+    message: Any
+
+
+class OnSelect(BaseModel):
+    context: Context
+    message: Any

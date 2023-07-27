@@ -1,9 +1,10 @@
 import datetime
+import json
 
 import requests
 from fastapi import APIRouter
 from mobility import search_model, mock_utils
-from mobility.search_model import OnSearch
+from mobility.search_model import OnSearch, OnSelect
 from starlette.background import BackgroundTasks
 
 router = APIRouter(
@@ -14,7 +15,13 @@ router = APIRouter(
 
 
 def send_on_search(url: str, on_search: OnSearch):
-    return requests.post(url + "/on_search", on_search)
+    headers = {"Content-Type": "application/json"}
+    return requests.post(url + "/on_search", data=on_search.model_dump_json(), headers=headers)
+
+
+def send_on_select(url: str, on_select: OnSelect):
+    headers = {"Content-Type": "application/json"}
+    return requests.post(url + "/on_select", data=on_select.model_dump_json(), headers=headers)
 
 
 @router.post("/search")
@@ -25,4 +32,39 @@ def get_catalogue(body: search_model.Search, background_task: BackgroundTasks):
     static_on_search.context.message_id = body.context.message_id
     static_on_search.context.timestamp = datetime.datetime.utcnow()
     background_task.add_task(send_on_search, body.context.bap_uri, static_on_search)
-    return {"message": {"ack": {"status": "ACK"}}}
+    json_response = {
+        "domain": "ONDC:TRV10",
+        "timestamp": f"{body.context.timestamp}",
+        "bap_id": f"{body.context.bap_id}",
+        "transaction_id": f"{body.context.transaction_id}",
+        "message_id": f"{body.context.message_id}",
+        "city": "std:080",
+        "core_version": "0.9.4",
+        "action": "search",
+        "bap_uri": f"{body.context.bap_uri}",
+    }
+    return {"context": json_response, "message": {"ack": {"status": "ACK"}}}
+
+
+@router.post("/select")
+def get_select(body: search_model.Select, background_task: BackgroundTasks):
+    static_on_select: OnSelect = mock_utils.get_select_results()
+    print(static_on_select)
+    static_on_select.context.transaction_id = body.context.transaction_id
+    static_on_select.context.message_id = body.context.message_id
+    static_on_select.context.timestamp = datetime.datetime.utcnow()
+    background_task.add_task(send_on_select, body.context.bap_uri, static_on_select)
+    json_response = {
+        "domain": "ONDC:TRV10",
+        "timestamp": f"{body.context.timestamp}",
+        "bap_id": f"{body.context.bap_id}",
+        "transaction_id": f"{body.context.transaction_id}",
+        "message_id": f"{body.context.message_id}",
+        "bpp_id": f"{body.context.bpp_id}",
+        "bpp_id": f"{body.context.bpp_uri}",
+        "city": "std:080",
+        "core_version": "0.9.4",
+        "action": f"{body.context.action}",
+        "bap_uri": f"{body.context.bap_uri}",
+    }
+    return {"context": json_response, "message": {"ack": {"status": "ACK"}}}
