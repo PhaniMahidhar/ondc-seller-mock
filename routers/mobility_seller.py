@@ -7,6 +7,9 @@ from mobility import search_model, mock_utils
 from mobility.search_model import OnSearch, OnSelect
 from starlette.background import BackgroundTasks
 
+BPP_URI= "https://mobility-mockserver-00ab4bdaacc0.herokuapp.com/mobility/bpp/mock/"
+BPP_ID="seller-mock"
+
 router = APIRouter(
     prefix="/mobility/bpp/mock",
     tags=["Mobility Seller"],
@@ -40,6 +43,8 @@ def get_catalogue(body: search_model.Search, background_task: BackgroundTasks):
         "core_version": "0.9.4",
         "action": "search",
         "bap_uri": f"{body.context.bap_uri}",
+        "bpp_id": f"{BPP_ID}",
+        "bpp_uri": f"{BPP_URI}",
     }
     return {"context": json_response, "message": {"ack": {"status": "ACK"}}}
 
@@ -58,8 +63,8 @@ def get_select(body: search_model.Select, background_task: BackgroundTasks):
         "bap_id": f"{body.context.bap_id}",
         "transaction_id": f"{body.context.transaction_id}",
         "message_id": f"{body.context.message_id}",
-        "bpp_id": f"{body.context.bpp_id}",
-        "bpp_uri": f"{body.context.bpp_uri}",
+        "bpp_id": f"{BPP_ID}",
+        "bpp_uri": f"{BPP_URI}",
         "city": "std:080",
         "core_version": "0.9.4",
         "action": f"{body.context.action}",
