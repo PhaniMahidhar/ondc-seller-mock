@@ -1,6 +1,6 @@
 import json
 
-from mobility.search_model import OnSearch, OnSelect, OnConfirm, OnInit
+from mobility.search_model import OnSearch, OnSelect, OnConfirm, OnInit, OnStatus
 
 
 def get_search_results() -> OnSearch:
@@ -25,3 +25,9 @@ def get_confirm_results() -> OnConfirm:
     with open("mock-data/on_confirm.json") as on_confirm:
         parsed_json = json.load(on_confirm)
     return OnConfirm(**parsed_json)
+
+
+def get_status_results() -> OnStatus:
+    with open("mock-data/on_status.json") as on_status:
+        parsed_json = json.load(on_status)
+    return OnStatus(**parsed_json)
