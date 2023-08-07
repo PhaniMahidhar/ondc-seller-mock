@@ -4,21 +4,30 @@ from typing import Optional
 
 from pydantic import BaseModel, Field, field_serializer
 
-BPP_URI= "https://mobility-mockserver-00ab4bdaacc0.herokuapp.com/mobility/bpp/mock/"
-BPP_ID="seller-mock"
+BPP_URI = "https://mobility-mockserver-00ab4bdaacc0.herokuapp.com/mobility/bpp/mock/"
+BPP_ID = "seller-mock"
+
 
 class Action(str, Enum):
     SEARCH = 'search'
     ON_SEARCH = 'on_search'
     SELECT = 'select'
     ON_SELECT = 'on_select'
+    INIT = 'init'
+    ON_INIT = 'on_init'
+    CONFIRM = 'confirm'
+    ON_CONFIRM = 'on_confirm'
+    STATUS = 'status'
+    ON_STATUS = 'on_status'
 
 
 class Domain(str, Enum):
     ONDC_TRV10 = 'ONDC:TRV10'
 
+
 def utc_timestamp():
     return datetime.utcnow().isoformat()[:-3] + 'Z'
+
 
 class Context(BaseModel):
     domain: Domain
