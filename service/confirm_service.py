@@ -22,7 +22,7 @@ class ConfirmService:
     def confirm_service(body: Confirm, background_task: BackgroundTasks):
         static_on_confirm: OnConfirm = mock_utils.get_confirm_results()
         print(static_on_confirm)
-        order_id = str(uuid4())
+        order_id = body.message.order.id
         static_on_confirm.context.transaction_id = body.context.transaction_id
         static_on_confirm.context.message_id = body.context.message_id
         static_on_confirm.context.timestamp = datetime.datetime.utcnow()
