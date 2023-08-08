@@ -112,6 +112,7 @@ class Quote(BaseModel):
 
 
 class Order(BaseModel):
+    id : str
     fulfillment: Fulfillment
     items: List[Item]
     payment: Payment
