@@ -56,3 +56,23 @@ class Status(BaseModel):
 class OnStatus(BaseModel):
     context: Context
     message: OnConfirmMessage
+
+
+class SupportMessage(BaseModel):
+    ref_id: str
+
+
+class Support(BaseModel):
+    context: Context
+    message: SupportMessage
+
+
+class OnSupportMessage(BaseModel):
+    phone : str
+    email : str
+    url : str
+
+
+class OnSupport(BaseModel):
+    context: Context
+    message: OnSupportMessage

@@ -51,7 +51,7 @@ def get_and_save_order(message: OnConfirm, transaction_id: str, message_id: str,
     confirm_data = message.message
     # Now create an instance of Order
     order = Order(order_id=order_id, order=message, message_id=message_id, transaction_id=transaction_id,
-                  bap_uri=bap_uri, bap_id=bap_id)
+                  bap_uri=bap_uri, bap_id=bap_id, count=1)
     order_data = order.dict()
     print(order_data)
     orders_collection = database["order"]

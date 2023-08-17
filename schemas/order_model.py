@@ -1,7 +1,4 @@
-
-
 from pydantic import BaseModel, Field
-
 
 from mobility.search_model import OnConfirm
 
@@ -14,3 +11,4 @@ class Order(BaseModel):
     transaction_id: str
     bap_uri: str
     bap_id: str
+    count: int
