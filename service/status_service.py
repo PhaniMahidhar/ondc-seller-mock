@@ -19,6 +19,7 @@ def send_on_status(url: str, on_status: OnStatus):
 class StatusService:
 
     def status_service(body: Status, background_task: BackgroundTasks):
+        getCountAndUpdateStatus(body.message.order_id)
         order_collection = database['order']
         document = order_collection.find_one({"order_id": body.message.order_id})
         order_data = Order(**document)
@@ -27,8 +28,6 @@ class StatusService:
         order.context.message_id = body.context.message_id
         order.context.timestamp = datetime.datetime.utcnow()
         order.context.action = Action.ON_STATUS
-        order.message.order.fulfillment.state.descriptor.code = 'DRIVER_AT_PICKUP'
-        order.message.order.fulfillment.state.descriptor.name = 'Driver Arrived at Pickup Location'
         print(order)
         background_task.add_task(send_on_status, body.context.bap_uri, order)
         json_response = {
@@ -45,3 +44,27 @@ class StatusService:
             "bpp_uri": f"{BPP_URI}",
         }
         return {"context": json_response, "message": {"ack": {"status": "ACK"}}}
+
+
+def getCountAndUpdateStatus(ondc_order_id : str):
+    order_collection = database['order']
+    document = order_collection.find_one({"order_id": ondc_order_id})
+    order = Order(**document)
+    count = order.count
+    if count > 4:
+        order.count = 0
+    if count == 1:
+        order.count = count + 1
+        order.order.message.order.fulfillment.state.descriptor.code = 'DRIVER_AT_PICKUP'
+    if count == 2:
+        order.count = count + 1
+        order.order.message.order.fulfillment.state.descriptor.code = 'DRIVER_EN_ROUTE_TO_PICKUP'
+    if count == 3:
+        order.count = count + 1
+        order.order.message.order.fulfillment.state.descriptor.code = 'RIDE_STARTED'
+
+    if count == 4:
+        order.count = count + 1
+        order.order.message.order.fulfillment.state.descriptor.code = 'RIDE_ENDED'
+    orders_collection = database["order"]
+    orders_collection.replace_one({"order_id": ondc_order_id}, order)
