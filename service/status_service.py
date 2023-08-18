@@ -51,20 +51,24 @@ def getCountAndUpdateStatus(ondc_order_id : str):
     document = order_collection.find_one({"order_id": ondc_order_id})
     order = Order(**document)
     count = order.count
-    if count > 4:
-        order.count = 0
-    if count == 1:
-        order.count = count + 1
-        order.order.message.order.fulfillment.state.descriptor.code = 'DRIVER_AT_PICKUP'
-    if count == 2:
-        order.count = count + 1
-        order.order.message.order.fulfillment.state.descriptor.code = 'DRIVER_EN_ROUTE_TO_PICKUP'
-    if count == 3:
-        order.count = count + 1
-        order.order.message.order.fulfillment.state.descriptor.code = 'RIDE_STARTED'
 
-    if count == 4:
-        order.count = count + 1
-        order.order.message.order.fulfillment.state.descriptor.code = 'RIDE_ENDED'
+    update_query = {"$set": {}}
+
+    if count > 4:
+        update_query["$set"]["count"] = 1
+    elif count == 1:
+        update_query["$set"]["count"] = count + 1
+        update_query["$set"]["order.message.order.fulfillment.state.descriptor.code"] = 'DRIVER_AT_PICKUP'
+    elif count == 2:
+        update_query["$set"]["count"] = count + 1
+        update_query["$set"]["order.message.order.fulfillment.state.descriptor.code"] = 'DRIVER_EN_ROUTE_TO_PICKUP'
+    elif count == 3:
+        update_query["$set"]["count"] = count + 1
+        update_query["$set"]["order.message.order.fulfillment.state.descriptor.code"] = 'RIDE_STARTED'
+    elif count == 4:
+        update_query["$set"]["count"] = count + 1
+        update_query["$set"]["order.message.order.fulfillment.state.descriptor.code"] = 'RIDE_ENDED'
+
     orders_collection = database["order"]
-    orders_collection.replace_one({"order_id": ondc_order_id}, order)
+    orders_collection.update_one({"order_id": ondc_order_id}, update_query)
+
