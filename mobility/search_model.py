@@ -69,9 +69,9 @@ class Support(BaseModel):
 
 
 class OnSupportMessage(BaseModel):
-    phone : str
-    email : str
-    url : str
+    phone: str
+    email: str
+    url: str
 
 
 class OnSupport(BaseModel):
@@ -80,8 +80,8 @@ class OnSupport(BaseModel):
 
 
 class CancelMessage(BaseModel):
-    cancellation_reason_id : str
-    order_id : str
+    cancellation_reason_id: str
+    order_id: str
 
 
 class Cancel(BaseModel):
@@ -92,3 +92,13 @@ class Cancel(BaseModel):
 class OnCancel(BaseModel):
     context: Context
     message: OnCancelMessage
+
+
+class Track(BaseModel):
+    context: Context
+    message: Any
+
+
+class OnTrack(BaseModel):
+    context: Context
+    message: Any

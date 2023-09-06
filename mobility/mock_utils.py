@@ -1,6 +1,6 @@
 import json
 
-from mobility.search_model import OnSearch, OnSelect, OnConfirm, OnInit, OnStatus, OnSupport, OnCancel
+from mobility.search_model import OnSearch, OnSelect, OnConfirm, OnInit, OnStatus, OnSupport, OnCancel, OnTrack
 
 
 def get_search_results() -> OnSearch:
@@ -39,8 +39,13 @@ def get_support_results() -> OnSupport:
     return OnSupport(**parsed_json)
 
 
-
 def get_cancel_results() -> OnCancel:
     with open("mock-data/on_cancel.json") as on_cancel:
         parsed_json = json.load(on_cancel)
     return OnCancel(**parsed_json)
+
+
+def get_track_results() -> OnTrack:
+    with open("mock-data/on_cancel.json") as on_track:
+        parsed_json = json.load(on_track)
+    return OnTrack(**parsed_json)
