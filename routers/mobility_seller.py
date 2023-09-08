@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from starlette.background import BackgroundTasks
 
 from mobility import search_model
-from mobility.search_model import Confirm, Status, Support, Cancel
+from mobility.search_model import Confirm, Status, Support, Cancel, Track
 from service import search_select_init_service, confirm_service, status_service, support_service
 
 BPP_URI = "https://mobility-mockserver-00ab4bdaacc0.herokuapp.com/mobility/bpp/mock/"
@@ -48,3 +48,8 @@ def get_support(body: Support, background_task: BackgroundTasks):
 @router.post("/cancel")
 def get_cancel(body: Cancel, background_task: BackgroundTasks):
     return status_service.CancelService.cancel_service(body, background_task)
+
+
+@router.post("/track")
+def get_track(body: Track, background_task: BackgroundTasks):
+    return status_service.TrackService.track_service(body, background_task)
