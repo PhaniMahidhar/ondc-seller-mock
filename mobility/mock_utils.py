@@ -22,14 +22,14 @@ def get_select_results() -> OnSelect:
 
 
 def get_select_results_uber() -> OnSelect:
-    with open("mock-data/on_select.json") as on_select:
+    with open("mock-data/on_select_uber.json") as on_select:
         parsed_json = json.load(on_select)
     return OnSelect(**parsed_json)
 
 
 
 def get_select_results_ola() -> OnSelect:
-    with open("mock-data/on_select.json") as on_select:
+    with open("mock-data/on_select_ola.json") as on_select:
         parsed_json = json.load(on_select)
     return OnSelect(**parsed_json)
 
