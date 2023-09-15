@@ -48,7 +48,7 @@
                 "maximum_value": "150",
                 "currency": "INR",
                 "minimum_value": "126",
-                "value": "156 - 176 INR"
+                "value": "100 - 180 INR"
               },
               "tags": {
                 "groups/1/descriptor/name": "Daytime Charges",
@@ -105,7 +105,7 @@
                 "maximum_value": "156",
                 "currency": "INR",
                 "minimum_value": "176",
-                "value": "156 - 176 INR"
+                "value": "200 - 250 INR"
               },
               "tags": {
                 "groups/1/descriptor/name": "Daytime Charges",
