@@ -9,7 +9,26 @@ def get_search_results() -> OnSearch:
     return OnSearch(**parsed_json)
 
 
+def get_search_results_uber() -> OnSearch:
+    with open("mock-data/on_search_uber.json") as on_search:
+        parsed_json = json.load(on_search)
+    return OnSearch(**parsed_json)
+
+
 def get_select_results() -> OnSelect:
+    with open("mock-data/on_select.json") as on_select:
+        parsed_json = json.load(on_select)
+    return OnSelect(**parsed_json)
+
+
+def get_select_results_uber() -> OnSelect:
+    with open("mock-data/on_select.json") as on_select:
+        parsed_json = json.load(on_select)
+    return OnSelect(**parsed_json)
+
+
+
+def get_select_results_ola() -> OnSelect:
     with open("mock-data/on_select.json") as on_select:
         parsed_json = json.load(on_select)
     return OnSelect(**parsed_json)
