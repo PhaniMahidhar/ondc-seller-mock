@@ -45,9 +45,9 @@
                 "code": "RIDE"
               },
               "price": {
-                "maximum_value": "156",
+                "maximum_value": "120",
                 "currency": "INR",
-                "minimum_value": "176",
+                "minimum_value": "156",
                 "value": "156 - 176 INR"
               },
               "tags": {
@@ -102,10 +102,10 @@
                 "code": "RIDE"
               },
               "price": {
-                "maximum_value": "156",
+                "maximum_value": "120",
                 "currency": "INR",
-                "minimum_value": "176",
-                "value": "156 - 176 INR"
+                "minimum_value": "150",
+                "value": "120 - 150 INR"
               },
               "tags": {
                 "groups/1/descriptor/name": "Daytime Charges",
@@ -204,7 +204,7 @@
               }
             },
             {
-              "id": "fb5c84d4-1b59-4b9d-96b5-9d79107432c5",
+              "id": "fb5c84d4-1b59-4b9d-96b5-9d79107432c6",
               "start": {
                 "location": {
                   "gps": "12.9099828, 77.6118226",
