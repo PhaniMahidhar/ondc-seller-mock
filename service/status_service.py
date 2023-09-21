@@ -68,10 +68,10 @@ def getCountAndUpdateStatus(ondc_order_id: str):
             update_query["$set"]["count"] = 1
         elif count == 1:
             update_query["$set"]["count"] = count + 1
-            update_query["$set"]["order.message.order.fulfillment.state.descriptor.code"] = 'DRIVER_AT_PICKUP'
+            update_query["$set"]["order.message.order.fulfillment.state.descriptor.code"] = 'DRIVER_EN_ROUTE_TO_PICKUP'
         elif count == 2:
             update_query["$set"]["count"] = count + 1
-            update_query["$set"]["order.message.order.fulfillment.state.descriptor.code"] = 'DRIVER_EN_ROUTE_TO_PICKUP'
+            update_query["$set"]["order.message.order.fulfillment.state.descriptor.code"] = 'DRIVER_AT_PICKUP'
         elif count == 3:
             update_query["$set"]["count"] = count + 1
             update_query["$set"]["order.message.order.fulfillment.state.descriptor.code"] = 'RIDE_STARTED'
