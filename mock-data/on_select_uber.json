@@ -13,16 +13,16 @@
     "message": {
         "order": {
             "provider": {
-                "id": "e8542642-0f4a-454c-9a9f-f46110c",
+                "id": "5777a0bf-9a08-49aa-a97d-1e55611",
                 "descriptor": {
-                    "name": "Raghavendra J"
+                    "name": "Rishu Raj"
                 }
             },
             "items": [
                 {
-                    "id": "5777a0bf-9a08-49aa-a97d-1e5561a9622e",
+                    "id": "5777a0bf-9a08-49aa-a97d-1e5561a911222",
                     "descriptor": {
-                        "name": "Auto Ride",
+                        "name": "Cab Ride",
                         "code": "RIDE"
                     },
                     "tags": {
@@ -85,7 +85,7 @@
                     {
                         "title": "Per km fare",
                         "price": {
-                            "value": "56",
+                            "value": "120",
                             "currency": "INR"
                         }
                     }
@@ -133,12 +133,12 @@
                     }
                 },
                 "agent": {
-                    "name": "RAGHAVENDRA J",
+                    "name": "Rishu Raj",
                     "rateable": true,
                     "rating": "5"
                 },
                 "vehicle": {
-                    "category": "AUTO_RICKSHAW"
+                    "category": "CAB"
                 }
             }
         }

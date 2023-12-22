@@ -21,6 +21,10 @@ class Action(str, Enum):
     ON_STATUS = 'on_status'
     SUPPORT = 'support'
     ON_SUPPORT = 'on_support'
+    CANCEL = 'cancel'
+    ONCANCEL = 'on_cancel'
+    TRACK = 'track'
+    ONTRACK = 'on_track'
 
 
 class Domain(str, Enum):

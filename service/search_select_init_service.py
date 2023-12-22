@@ -26,11 +26,16 @@ class SearchService:
 
     def search_service(body: search_model.Search, background_task: BackgroundTasks):
         static_on_search: OnSearch = mock_utils.get_search_results()
+        static_on_search_uber: OnSearch = mock_utils.get_search_results_uber()
         print(static_on_search)
         static_on_search.context.transaction_id = body.context.transaction_id
         static_on_search.context.message_id = body.context.message_id
         static_on_search.context.timestamp = datetime.datetime.utcnow()
+        static_on_search_uber.context.transaction_id = body.context.transaction_id
+        static_on_search_uber.context.message_id = body.context.message_id
+        static_on_search_uber.context.timestamp = datetime.datetime.utcnow()
         background_task.add_task(send_on_search, body.context.bap_uri, static_on_search)
+        background_task.add_task(send_on_search, body.context.bap_uri, static_on_search_uber)
         json_response = {
             "domain": "ONDC:TRV10",
             "timestamp": f"{datetime.datetime.utcnow().isoformat()[:-3] + 'Z'}",
@@ -51,11 +56,21 @@ class SelectService:
 
     def select_service(body: search_model.Select, background_task: BackgroundTasks):
         static_on_select: OnSelect = mock_utils.get_select_results()
+        static_on_select_ola: OnSelect = mock_utils.get_select_results_ola()
+        static_on_select_uber: OnSelect = mock_utils.get_select_results_uber()
         print(static_on_select)
         static_on_select.context.transaction_id = body.context.transaction_id
         static_on_select.context.message_id = body.context.message_id
         static_on_select.context.timestamp = datetime.datetime.utcnow()
+        static_on_select_uber.context.transaction_id = body.context.transaction_id
+        static_on_select_uber.context.message_id = body.context.message_id
+        static_on_select_uber.context.timestamp = datetime.datetime.utcnow()
+        static_on_select_ola.context.transaction_id = body.context.transaction_id
+        static_on_select_ola.context.message_id = body.context.message_id
+        static_on_select_ola.context.timestamp = datetime.datetime.utcnow()
         background_task.add_task(send_on_select, body.context.bap_uri, static_on_select)
+        background_task.add_task(send_on_select, body.context.bap_uri, static_on_select_ola)
+        background_task.add_task(send_on_select, body.context.bap_uri, static_on_select_uber)
         json_response = {
             "domain": "ONDC:TRV10",
             "timestamp": f"{datetime.datetime.utcnow().isoformat()[:-3] + 'Z'}",

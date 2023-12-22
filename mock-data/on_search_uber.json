@@ -7,7 +7,7 @@
     "message_id": "21e54d3c-9c3b-47c1-aa3b-b0e7b20818ee",
     "city": "std:080",
     "core_version": "1.0.0",
-    "bpp_id": "seller-mock",
+    "bpp_id": "seller-mock-uber",
     "bpp_uri": "https://mobility-mockserver-00ab4bdaacc0.herokuapp.com/mobility/bpp/mock/",
     "action": "on_search",
     "bap_uri": "https://api.example-bap.com/pilot/bap/cab/v1"
@@ -15,7 +15,7 @@
   "message": {
     "catalog": {
       "bpp/descriptor": {
-        "name": "Namma Yatri Partner"
+        "name": "UBER"
       },
       "bpp/providers": [
         {
@@ -39,16 +39,16 @@
           ],
           "items": [
             {
-              "id": "5777a0bf-9a08-49aa-a97d-1e5561a9622e",
+              "id": "5777a0bf-9a08-49aa-a97d-1e5561a911222",
               "descriptor": {
-                "name": "Auto Ride",
+                "name": "Cab Ride",
                 "code": "RIDE"
               },
               "price": {
-                "maximum_value": "120",
+                "maximum_value": "150",
                 "currency": "INR",
-                "minimum_value": "156",
-                "value": "200 -276 INR"
+                "minimum_value": "126",
+                "value": "100 - 180 INR"
               },
               "tags": {
                 "groups/1/descriptor/name": "Daytime Charges",
@@ -96,16 +96,16 @@
               "payment_id": "1"
             },
             {
-              "id": "5777a0bf-9a08-49aa-a97d-1e556111111",
+              "id": "5777a0bf-9a08-49aa-a97d-1e556111111e",
               "descriptor": {
                 "name": "Cab Ride",
                 "code": "RIDE"
               },
               "price": {
-                "maximum_value": "120",
+                "maximum_value": "156",
                 "currency": "INR",
-                "minimum_value": "150",
-                "value": "120 - 150 INR"
+                "minimum_value": "176",
+                "value": "200 - 250 INR"
               },
               "tags": {
                 "groups/1/descriptor/name": "Daytime Charges",
@@ -189,7 +189,7 @@
                 }
               },
               "vehicle": {
-                "category": "AUTO_RICKSHAW"
+                "category": "CAB"
               },
               "tags": {
                 "groups/1/descriptor/code": "route_info",
@@ -204,7 +204,7 @@
               }
             },
             {
-              "id": "fb5c84d4-1b59-4b9d-96b5-9d79107432c6",
+              "id": "fb5c84d4-1b59-4b9d-96b5-9d79107432c5",
               "start": {
                 "location": {
                   "gps": "12.9099828, 77.6118226",
